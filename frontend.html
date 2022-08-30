@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>HackerEarth Profile </title>
+    <meta charset="UTF-8">
+    <body>
+    <h2>HackerEarth Profile</h2>
+    <p id="solutions_submitted"> </p>
+    <p id="problem_solved"> </p>
+    </body>
+    <script>
+	  var baseUrl="https://www.hackerearth.com/profiles/api/anand2604/badge-activity"
+    var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+    const solutionSubmitted=document.getElementById('solutions_submitted');
+    const problemSolved=document.getElementById('problem_solved');
+    function doCORSRequest(printResult) {
+    var x = new XMLHttpRequest();
+    x.open("GET", cors_api_url + baseUrl);
+    x.onreadystatechange = function() {
+      const response =JSON.parse(x.responseText);   
+      solutionSubmitted.innerHTML="Problem Solved : "+response.he_metrics.solutions_submitted;
+      problemSolved.innerHTML="Problem Solved : "+response.he_metrics.problem_solved;
+    };
+    x.send();
+    }
+    window.onload = function(){
+       var outputField = 
+        doCORSRequest( function printResult(result) {
+        outputField.innerHTML = result;
+      });
+    }
+    </script>
+  </head>
+</html>
